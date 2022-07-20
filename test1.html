@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<meta name = "viewport"
+	      content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv = "X-UA-Compatible"
+	      content = "ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<div id="root"></div>
+	<!-- React的核心库，与宿主环境无关 -->
+	<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	<!-- 依赖核心库，将核心的功能与页面结合 -->
+	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+	<script>
+		let span = React.createElement("span",{}, "这是一个span元素");
+        let h1 = React.createElement("h1",{
+            title:"h1元素"
+        }, "Hello World", span);
+        ReactDOM.render(h1, document.getElementById("root"));
+	</script>
+</body>
+</html>
