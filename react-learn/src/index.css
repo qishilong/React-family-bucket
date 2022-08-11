@@ -1,0 +1,12 @@
+#root{
+    height: 200px;
+    width: 200px;
+    outline: 1px solid;
+    margin: 0 auto;
+}
+
+#root img{
+    height: 100%;
+    width: 100%;
+    display: block;
+}
