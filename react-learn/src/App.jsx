@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
-import Test from "./components/common/Select/Test";
+import DemoRef from "./components/DemoRef";
 
-// import Test from "./components/common/RadioBoxGroup/Test";
+// import NewEditionRef from "./components/NewEditionRef";
 
-// import Test from "./components/common/CheckBoxGroup/Test";
+// import LegacyRef from "./components/LegacyRef";
 class App extends Component {
     render() {
         return (
             <>
-                <Test />
+                <DemoRef />
             </>
         );
     }
