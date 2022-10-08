@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 
-import FormTest from "./components/FormTest";
+import Test from "./components/common/Select/Test";
 
-// import NumberInput from "./components/NumberInput";
+// import Test from "./components/common/RadioBoxGroup/Test";
+
+// import Test from "./components/common/CheckBoxGroup/Test";
 class App extends Component {
     render() {
         return (
-            // <NumberInput />
             <>
-                <FormTest />
+                <Test />
             </>
         );
     }
