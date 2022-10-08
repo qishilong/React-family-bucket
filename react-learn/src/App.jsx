@@ -1,15 +1,30 @@
 import React, { Component } from "react";
 
-import Test from "./components/common/Select/Test";
+import { A, B } from "./components/Comp";
+import WithLog from "./HOC/WithLog";
+import WithLogin from "./HOC/WithLogin";
 
-// import Test from "./components/common/RadioBoxGroup/Test";
-
-// import Test from "./components/common/CheckBoxGroup/Test";
+let AComp = WithLogin(WithLog(A, "abc"));
+let BComp = WithLogin(WithLog(B, "abc"));
 class App extends Component {
     render() {
         return (
             <>
-                <Test />
+                <AComp
+                    isLogin={true}
+                    a={1}
+                />
+                <BComp
+                    isLogin={true}
+                    b={2}
+                />
+                <button
+                    onClick={() => {
+                        this.setState({});
+                    }}
+                >
+                    点击
+                </button>
             </>
         );
     }
