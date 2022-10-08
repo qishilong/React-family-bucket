@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import WithDataGroup from "../HOC/WithDataGroup";
+
 class CheckBoxGroup extends Component {
     handleChange = e => {
         let checkBoxArray;
@@ -8,30 +10,25 @@ class CheckBoxGroup extends Component {
         } else {
             checkBoxArray = this.props.chooseData.filter(item => item !== e.target.value);
         }
-        this.props.onChange && this.props.onChange(checkBoxArray, this.props.name, e);
+        this.props.onChange && this.props.onChange(checkBoxArray);
     };
 
-    // 得到一组多选框
-    getCheckBoxGroup() {
-        // console.log(this.props.data);
-        // console.log(this.props.chooseData);
-        return this.props.data.map(item => (
-            <label key={item.value}>
-                <input
-                    type="checkbox"
-                    value={item.value}
-                    name={this.props.name}
-                    onChange={this.handleChange}
-                    checked={this.props.chooseData.includes(item.value)}
-                />
-                {item.text}
-            </label>
-        ));
-    }
     render() {
-        const checkBoxGroupData = this.getCheckBoxGroup();
-        return <>{checkBoxGroupData}</>;
+        return (
+            <>
+                <label>
+                    <input
+                        type="checkbox"
+                        value={this.props.info.value}
+                        name={this.props.name}
+                        onChange={this.handleChange}
+                        checked={this.props.chooseData.includes(this.props.info.value)}
+                    />
+                    {this.props.info.text}
+                </label>
+            </>
+        );
     }
 }
 
-export default CheckBoxGroup;
+export default WithDataGroup(CheckBoxGroup);

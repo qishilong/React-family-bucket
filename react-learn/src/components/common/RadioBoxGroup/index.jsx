@@ -1,31 +1,26 @@
 import React, { Component } from "react";
 
-class RadioBoxGroup extends Component {
-    handleChange = e => {
-        this.props.onChange && this.props.onChange(e.target.value, this.props.name, e);
-    };
+import WithDataGroup from "../HOC/WithDataGroup";
 
-    // 得到一组单选框
-    getRadioBoxGroup() {
-        // console.log(this.props.data);
-        // console.log(this.props.chooseData);
-        return this.props.data.map(item => (
-            <label key={item.value}>
-                <input
-                    type="radio"
-                    value={item.value}
-                    name={this.props.name}
-                    onChange={this.handleChange}
-                    checked={this.props.value === item.value}
-                />
-                {item.text}
-            </label>
-        ));
-    }
+class RadioBoxGroup extends Component {
     render() {
-        const RadioBoxGroupData = this.getRadioBoxGroup();
-        return <>{RadioBoxGroupData}</>;
+        return (
+            <>
+                <label key={this.props.info.value}>
+                    <input
+                        type="radio"
+                        value={this.props.info.value}
+                        name={this.props.name}
+                        onChange={() =>
+                            this.props.onChange && this.props.onChange(this.props.info.value)
+                        }
+                        checked={this.props.value === this.props.info.value}
+                    />
+                    {this.props.info.text}
+                </label>
+            </>
+        );
     }
 }
 
-export default RadioBoxGroup;
+export default WithDataGroup(RadioBoxGroup);

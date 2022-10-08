@@ -1,35 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 
-class SelectGroup extends Component {
-    handleChange = e => {
-        this.props.onChange && this.props.onChange(e.target.value, this.props.name, e);
-    };
+import WithDataGroup from "../HOC/WithDataGroup";
 
-    // 得到一组单选框
-    getOption() {
-        // console.log(this.props.data);
-        // console.log(this.props.chooseData);
-        return this.props.data.map(item => (
-            <option
-                key={item.value}
-                value={item.value}
-            >
-                {item.text}
-            </option>
-        ));
-    }
+class Option extends React.Component {
     render() {
-        const OptionData = this.getOption();
+        return <option value={this.props.info.value}>{this.props.info.text}</option>;
+    }
+}
+
+const OptionGroup = WithDataGroup(Option);
+
+class Select extends React.Component {
+    render() {
         return (
             <select
-                name={this.props.value}
+                name={this.name}
                 value={this.props.value}
-                onChange={this.handleChange}
+                onChange={e => this.props.onChange && this.props.onChange(e.target.value)}
             >
-                {OptionData}
+                <OptionGroup {...this.props}></OptionGroup>
             </select>
         );
     }
 }
 
-export default SelectGroup;
+export default Select;
