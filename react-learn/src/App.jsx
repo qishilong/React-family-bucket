@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 
-import HOCComponent from "./refs/WithHOCComponent";
+import OldContext from "./Context/OldContext";
 
-// import RefsClass from "./refs/WithClassComponent";
-
-// import RefsFun from "./refs/WithFunComponent";
 class App extends Component {
     render() {
         return (
             <>
-                <HOCComponent />
+                <OldContext />
             </>
         );
     }
