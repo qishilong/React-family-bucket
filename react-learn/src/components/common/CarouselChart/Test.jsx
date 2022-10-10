@@ -12,7 +12,10 @@ class Test extends Component {
     render() {
         return (
             <>
-                <CarouselChart imgSrc={[img1, img2, img3, img4, img5]} />
+                <CarouselChart
+                    imgSrc={[img1, img2, img3, img4, img5]}
+                    duration={500}
+                />
             </>
         );
     }
