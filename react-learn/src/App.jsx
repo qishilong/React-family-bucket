@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 
-import DemoRef from "./components/DemoRef";
+import Test from "./components/common/CarouselChart/Test";
 
-// import NewEditionRef from "./components/NewEditionRef";
-
-// import LegacyRef from "./components/LegacyRef";
 class App extends Component {
     render() {
         return (
             <>
-                <DemoRef />
+                <Test />
             </>
         );
     }
