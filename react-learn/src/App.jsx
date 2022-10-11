@@ -1,39 +1,62 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ErrorBound from "./components/common/ErrorBound";
 
-function ChildA() {
-    return ReactDOM.createPortal(
+function Comp1() {
+    return (
         <div
-            className="child-a"
             style={{
-                marginTop: 200,
+                width: "90%",
+                height: 500,
+                border: "2px solid",
             }}
         >
-            <h1>ChildA</h1>
-            <ChildB />
-        </div>,
-        document.querySelector(".modal"),
+            <h1>Comp1</h1>
+            <Comp2 />
+        </div>
     );
 }
 
-function ChildB() {
+function Comp2() {
     return (
-        <div className="child-b">
-            <h1>ChildB</h1>
+        <div
+            style={{
+                width: "70%",
+                height: "70%",
+                border: "2px solid",
+            }}
+        >
+            <h1
+                onClick={() => {
+                    throw new Error("点击时发生的错误");
+                }}
+            >
+                Comp2
+            </h1>
+        </div>
+    );
+}
+
+function Comp3() {
+    return (
+        <div
+            style={{
+                width: "90%",
+                height: 500,
+                border: "2px solid",
+            }}
+        >
+            <h1>Comp3</h1>
         </div>
     );
 }
 
 export default function App() {
     return (
-        <div
-            className="app"
-            onClick={e => {
-                console.log("App被点击了", e.target);
-            }}
-        >
-            <h1>App</h1>
-            <ChildA />
+        <div>
+            <ErrorBound>
+                <Comp1 />
+            </ErrorBound>
+            <Comp3 />
         </div>
     );
 }
