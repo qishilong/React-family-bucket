@@ -21,7 +21,6 @@ class ChildB extends Component {
 
 class NewContext extends Component {
     state = {
-        // contextData里面的值通过 setState 更改后不能更新到contextData里面，或者说contextData里面的值不能通过setState更改
         contextData: {
             a: 123,
             b: "100",
@@ -37,7 +36,17 @@ class NewContext extends Component {
                 <>
                     <ChildB />
                     <button
-                        onClick={() => this.setState({ a: this.state.contextData.a + 1 })}
+                        onClick={() =>
+                            this.setState(
+                                {
+                                    contextData: {
+                                        ...this.state.contextData,
+                                        a: this.state.contextData.a + 1,
+                                    },
+                                },
+                                () => console.log(this.state.contextData.a),
+                            )
+                        }
                         // onMouseDown={() => console.log(this.state.contextData.a)}
                     >
                         a+1
