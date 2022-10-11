@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import OldContext from "./Context/OldContext";
+import NewContext from "./Context/NewContext/NewContext";
 
 class App extends Component {
     render() {
         return (
             <>
-                <OldContext />
+                <NewContext />
             </>
         );
     }
