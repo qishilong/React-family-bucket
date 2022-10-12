@@ -1,41 +1,71 @@
-import React from "react";
+import React, { Component } from "react";
 
-var prev;
-export default function App() {
-    return (
-        <div
-            onClick={e => {
-                console.log(prev === e);
-                console.log("react: div被点击了");
-            }}
-        >
-            <input
-                type="text"
-                onFocus={e => {
-                    console.log("react：文本获得了焦点");
-                }}
-            />
-            <button
-                onClick={e => {
-                    console.log("react: 按钮被点击了");
-                    prev = e;
-                    e.persist();
-                    setTimeout(() => {
-                        console.log(e.type);
-                    }, 1000);
-                    // e.nativeEvent.stopImmediatePropagation()
-                    // console.log(e.isPropagationStopped());
-                    // e.stopPropagation();
-                    // console.log(e.isPropagationStopped());
-                }}
-            >
-                按钮
-            </button>
-        </div>
-    );
+class CompA extends Component {
+    state = {
+        n: 1,
+    };
+
+    componentDidMount() {
+        console.log("CompA 新建");
+    }
+
+    componentWillUnmount() {
+        console.log("CompA 卸载");
+    }
+
+    render() {
+        return (
+            <div>
+                数字：{this.state.n}{" "}
+                <button
+                    onClick={() => {
+                        this.setState({
+                            n: this.state.n + 1,
+                        });
+                    }}
+                >
+                    +
+                </button>
+            </div>
+        );
+    }
 }
 
-document.querySelector("#root").onFocus = function (e) {
-    console.log("阻止focus事件冒泡");
-    e.stopPropagation();
-};
+export default class App extends Component {
+    state = {
+        isVisible: false,
+    };
+    render() {
+        if (this.state.isVisible) {
+            return (
+                <div>
+                    <h1>标题</h1>
+                    <CompA key="compa" />
+                    <button
+                        onClick={() => {
+                            this.setState({
+                                isVisible: !this.state.isVisible,
+                            });
+                        }}
+                    >
+                        显示/隐藏
+                    </button>
+                </div>
+            );
+        }
+        return (
+            <div>
+                <CompA key="compa" />
+                <button
+                    onClick={() => {
+                        this.setState({
+                            isVisible: !this.state.isVisible,
+                        });
+                    }}
+                >
+                    显示/隐藏
+                </button>
+            </div>
+        );
+    }
+}
