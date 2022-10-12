@@ -1,83 +1,21 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
-class CompA extends Component {
-    componentDidMount() {
-        console.log("CompA 新组件挂载")
-    }
-
-    componentWillUnmount() {
-        console.log("CompA 卸载")
-    }
-
-    render() {
-        console.log("CompA render")
-        return <CompAA />
-    }
-}
-
-class CompAA extends Component {
-    componentDidMount() {
-        console.log("CompAA 新组件挂载")
-    }
-
-    componentWillUnmount() {
-        console.log("CompAA 卸载")
-    }
-
-    render(){
-        console.log("CompAA render")
-        return null;
-    }
-}
-
-class CompB extends Component {
-    componentDidMount() {
-        console.log("CompB 新组件挂载")
-    }
-
-    componentWillUnmount() {
-        console.log("CompB 卸载")
-    }
-    render() {
-        console.log("CompB render")
-        return <CompBB />
-    }
-}
-
-class CompBB extends Component {
-    componentDidMount() {
-        console.log("CompBB 新组件挂载")
-    }
-
-    componentWillUnmount() {
-        console.log("CompBB 卸载")
-    }
-
-    render(){
-        console.log("CompBB render")
-        return null;
-    }
-}
-
-
-
-export default class App extends Component {
-    state = {
-        n: 0
-    }
-    render() {
-        if (this.state.n === 0) {
-            return <div>
-                <CompB />
-                <button onClick={() => {
-                    this.setState({
-                        n: 1
-                    })
-                }}>点击</button>
-            </div>;
-        }
-        return (
-            <CompA />
-        )
-    }
+export default function App() {
+    console.log("App Render");
+    const [visible, setVisible] = useState(true);
+    const [n, setN] = useState(0);
+    return <div>
+        <p style={{ display: visible ? "block" : "none" }}>
+            <button onClick={() => {
+                setN(n - 1)
+            }}>-</button>
+            <span>{n}</span>
+            <button onClick={() => {
+                setN(n + 1)
+            }}>+</button>
+        </p>
+        <button onClick={() => {
+            setVisible(!visible);
+        }}>显示/隐藏</button>
+    </div>
 }

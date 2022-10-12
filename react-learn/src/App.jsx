@@ -1,71 +1,23 @@
-import React, { Component } from "react";
+import React, { useState } from 'react'
 
-class CompA extends Component {
-    state = {
-        n: 1,
-    };
 
-    componentDidMount() {
-        console.log("CompA 新建");
-    }
+export default function App() {
+    console.log("App render")
+    const [n, setN] = useState(0); //使用一个状态，该状态的默认值是0
+    return <div>
+        <button onClick={() => {
+            // setN(n - 1);
+            // setN(n - 1);
+            setN(prevN => prevN - 1); //传入的函数，在事件完成之后统一运行
+            setN(prevN => prevN - 1);
+        }}>-</button>
+        <span>{n}</span>
+        <button onClick={() => {
+            // setN(n + 1) //不会立即改变，事件运行完成之后一起改变
+            // setN(n + 1) //此时，n的值仍然是0
 
-    componentWillUnmount() {
-        console.log("CompA 卸载");
-    }
-
-    render() {
-        return (
-            <div>
-                数字：{this.state.n}{" "}
-                <button
-                    onClick={() => {
-                        this.setState({
-                            n: this.state.n + 1,
-                        });
-                    }}
-                >
-                    +
-                </button>
-            </div>
-        );
-    }
-}
-
-export default class App extends Component {
-    state = {
-        isVisible: false,
-    };
-    render() {
-        if (this.state.isVisible) {
-            return (
-                <div>
-                    <h1>标题</h1>
-                    <CompA key="compa" />
-                    <button
-                        onClick={() => {
-                            this.setState({
-                                isVisible: !this.state.isVisible,
-                            });
-                        }}
-                    >
-                        显示/隐藏
-                    </button>
-                </div>
-            );
-        }
-        return (
-            <div>
-                <CompA key="compa" />
-                <button
-                    onClick={() => {
-                        this.setState({
-                            isVisible: !this.state.isVisible,
-                        });
-                    }}
-                >
-                    显示/隐藏
-                </button>
-            </div>
-        );
-    }
+            setN(prevN => prevN + 1); //传入的函数，在事件完成之后统一运行
+            setN(prevN => prevN + 1);
+        }}>+</button>
+    </div>
 }

@@ -1,31 +1,29 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+
+// import React, { Component } from 'react'
+
+// export default class App extends Component {
+//     render() {
+//         return (
+//             <div>
+//                 <button onClick={()=>{
+//                     //不会运行shouldComponentUpdate
+//                     this.forceUpdate();//强制重新渲染
+//                 }}>强制刷新</button>
+//             </div>
+//         )
+//     }
+// }
 
 
-export default class App extends Component {
-    state = {
-        visible: false
-    }
-    render() {
-        // if (this.state.visible) {
-        //     return <div>
-        //         <h1>标题</h1>
-        //         <button onClick={() => {
-        //             this.setState({
-        //                 visible: !this.state.visible
-        //             })
-        //         }}>显示/隐藏</button>
-        //     </div>;
-        // }
-        const h1 = this.state.visible? <h1>标题</h1> : null;
-        return (
-            <div>
-                {h1}
-                <button onClick={() => {
-                    this.setState({
-                        visible: !this.state.visible
-                    })
-                }}>显示/隐藏</button>
-            </div>
-        )
-    }
+export default function App() {
+    console.log("App Render");
+    const [, forceUpdate] = useState({});
+    return <div>
+        <p >
+            <button onClick={() => {
+                forceUpdate({});
+            }}>强制刷新</button>
+        </p>
+    </div>
 }
