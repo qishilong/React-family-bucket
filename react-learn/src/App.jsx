@@ -1,11 +1,11 @@
 import React from "react";
 
-import UseEffect from "./HOOK/useEffect/UseEffect";
+import ContainerStudent from "./components/ContainerStudent";
 
 const App = () => {
     return (
         <>
-            <UseEffect />
+            <ContainerStudent />
         </>
     );
 };

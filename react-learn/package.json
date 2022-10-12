@@ -135,5 +135,6 @@
     "presets": [
       "react-app"
     ]
-  }
+},
+"proxy": "http://api.duyiedu.com"
 }
