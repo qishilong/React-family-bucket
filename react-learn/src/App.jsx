@@ -1,30 +1,22 @@
-import { useReducer } from "react";
+import { createContext, useContext } from "react";
 
-// import useReducer from "./HOOK/myHOOKs/useReducer";
-const App = () => {
-    const reducer = (state, actions) => {
-        switch (actions.type) {
-            case "add":
-                return state + 1;
-            case "detele":
-                if (state === 0) {
-                    return 0;
-                }
-                return state - 1;
-            default:
-                return state;
-        }
-    };
+const context1 = createContext();
 
-    const [n, dispatch] = useReducer(reducer, 10, init => {
-        return 100;
-    });
+const Test = () => {
+    const context = useContext(context1);
     return (
         <>
-            <button onClick={() => dispatch({ type: "detele" })}>-</button>
-            <p>{n}</p>
-            <button onClick={() => dispatch({ type: "add" })}>+</button>
+            <p>{context}</p>
+            {/* <context1.Consumer>{value => <p>{value}</p>}</context1.Consumer> */}
         </>
+    );
+};
+
+const App = () => {
+    return (
+        <context1.Provider value="a">
+            <Test />
+        </context1.Provider>
     );
 };
 
