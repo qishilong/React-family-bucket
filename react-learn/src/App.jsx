@@ -1,29 +1,17 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
-
-const Test = (props, ref) => {
-    useImperativeHandle(
-        ref,
-        () => {
-            return {
-                method() {
-                    console.log("method");
-                },
-            };
-        },
-        [],
-    );
-
-    return <p>Test Component</p>;
-};
-
-const TestWrapper = forwardRef(Test);
+import { useLayoutEffect, useRef, useState } from "react";
 
 const App = () => {
-    const testRef = useRef();
+    const [number, setNumber] = useState(0);
+    const ref = useRef();
+
+    useLayoutEffect(() => {
+        ref.current.innerText = Math.random().toFixed(2);
+    });
+
     return (
         <>
-            <TestWrapper ref={testRef} />
-            <button onClick={() => testRef.current.method()}>获取Test组件的method方法</button>
+            <p ref={ref}>{number}</p>
+            <button onClick={() => setNumber(previous => previous + 1)}>+1</button>
         </>
     );
 };
