@@ -1,52 +1,22 @@
-import { useMemo, useState } from "react";
-
-const Item = props => {
-    return <li>{props.value}</li>;
-};
+import { useEffect, useRef, useState } from "react";
 
 const App = () => {
-    const [range] = useState({ min: 10, max: 10000 });
-    const [n, setN] = useState(0);
+    const [number, setNumber] = useState(10);
+    const timerRef = useRef(number);
 
-    const list = useMemo(() => {
-        const lists = [];
-        for (let i = range.min; i < range.max; i++) {
-            console.log(1);
-            lists.push(
-                <Item
-                    key={i}
-                    value={i}
-                >
-                    {i}
-                </Item>,
-            );
-        }
-        return lists;
-    }, [range.min, range.max]);
-    // const lists = [];
-    // for (let i = range.min; i < range.max; i++) {
-    //     console.log(1);
-    //     lists.push(
-    //         <Item
-    //             key={i}
-    //             value={i}
-    //         >
-    //             {i}
-    //         </Item>,
-    //     );
-    // }
-    // return lists;
+    useEffect(() => {
+        const timer = setInterval(() => {
+            timerRef.current--;
+            setNumber(previous => (previous = timerRef.current));
+            // console.log(number); 10
+            // console.log(timerRef.current); 9-0
+            if (timerRef.current === 0) {
+                clearInterval(timer);
+            }
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
 
-    return (
-        <>
-            <ul>{list}</ul>
-            <input
-                type="number"
-                value={n}
-                onChange={e => setN(previous => (previous = e.target.value))}
-            />
-        </>
-    );
-};;
-
+    return <>{number}</>;
+};
 export default App;
