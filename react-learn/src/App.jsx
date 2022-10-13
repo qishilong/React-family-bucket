@@ -1,22 +1,30 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
+
+const Test = (props, ref) => {
+    useImperativeHandle(
+        ref,
+        () => {
+            return {
+                method() {
+                    console.log("method");
+                },
+            };
+        },
+        [],
+    );
+
+    return <p>Test Component</p>;
+};
+
+const TestWrapper = forwardRef(Test);
 
 const App = () => {
-    const [number, setNumber] = useState(10);
-    const timerRef = useRef(number);
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            timerRef.current--;
-            setNumber(previous => (previous = timerRef.current));
-            // console.log(number); 10
-            // console.log(timerRef.current); 9-0
-            if (timerRef.current === 0) {
-                clearInterval(timer);
-            }
-        }, 1000);
-        return () => clearInterval(timer);
-    }, []);
-
-    return <>{number}</>;
+    const testRef = useRef();
+    return (
+        <>
+            <TestWrapper ref={testRef} />
+            <button onClick={() => testRef.current.method()}>获取Test组件的method方法</button>
+        </>
+    );
 };
 export default App;

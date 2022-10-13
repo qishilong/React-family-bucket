@@ -1,24 +1,20 @@
-import { useRef, useState } from "react";
+import { Component, useRef } from "react";
 
-window.arr = [];
+class Test extends Component {
+    methods() {
+        console.log("mothods 调用");
+    }
+    render() {
+        return <p>Test Component</p>;
+    }
+}
 
 const App = () => {
-    const [number, setNumber] = useState(0);
-    const inputRef = useRef();
-    window.arr.push(inputRef);
-    // console.log(window.arr);
-    // window.arr[0]===window.arr[1] true
+    const testRef = useRef();
     return (
         <>
-            <input
-                ref={inputRef}
-                type="text"
-            />
-            <button onClick={() => console.log(inputRef.current.value)}>获得input的内容</button>
-            <input
-                value={number}
-                onChange={e => setNumber(previous => (previous = e.target.value))}
-            />
+            <Test ref={testRef} />
+            <button onClick={() => testRef.current.methods()}>获取Test组件的method方法</button>
         </>
     );
 };
