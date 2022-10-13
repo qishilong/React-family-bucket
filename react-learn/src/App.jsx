@@ -1,32 +1,31 @@
-import { Component } from "react";
+import { useReducer } from "react";
 
-import { getAllStudents } from "./services/fetchStudent";
-
-class AllStudentsData extends Component {
-    state = {
-        data: [],
+// import useReducer from "./HOOK/myHOOKs/useReducer";
+const App = () => {
+    const reducer = (state, actions) => {
+        switch (actions.type) {
+            case "add":
+                return state + 1;
+            case "detele":
+                if (state === 0) {
+                    return 0;
+                }
+                return state - 1;
+            default:
+                return state;
+        }
     };
 
-    async componentDidMount() {
-        const students = await getAllStudents();
-        this.setState({
-            data: students,
-        });
-    }
-    render() {
-        if (typeof this.props.render === "function") {
-            return this.props.render(this.state.data);
-        }
-        return null;
-    }
-}
-
-const Test = props => {
-    const studentList = props.students.map(item => <li key={item.id}>{item.name}</li>);
-    return <ul>{studentList}</ul>;
+    const [n, dispatch] = useReducer(reducer, 10, init => {
+        return 100;
+    });
+    return (
+        <>
+            <button onClick={() => dispatch({ type: "detele" })}>-</button>
+            <p>{n}</p>
+            <button onClick={() => dispatch({ type: "add" })}>+</button>
+        </>
+    );
 };
 
-const App = () => {
-    return <AllStudentsData render={students => <Test students={students} />} />;
-};
 export default App;

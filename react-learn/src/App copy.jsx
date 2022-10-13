@@ -1,25 +1,30 @@
 import React from "react";
 
-import useGetAllStudent from "./HOOK/myHOOKs/useGetAllStudent";
-
-
-
-const Show = () => {
-    const students = useGetAllStudent();
-
-    return (
-        <ul>
-            {students.map(item => (
-                <li key={item.id}>{item.name}</li>
-            ))}
-        </ul>
-    );
-};
+import useReducer from "./HOOK/myHOOKs/useReducer";
 
 const App = () => {
+    const reducer = (state, actions) => {
+        switch (actions.type) {
+            case "add":
+                return state + 1;
+            case "detele":
+                if (state === 0) {
+                    return 0;
+                }
+                return state - 1;
+            default:
+                return state;
+        }
+    };
+
+    const [n, dispatch] = useReducer(reducer, 10, init => {
+        return init;
+    });
     return (
         <>
-            <Show />
+            <button onClick={() => dispatch({ type: "detele" })}>-</button>
+            <p>{n}</p>
+            <button onClick={() => dispatch({ type: "add" })}>+</button>
         </>
     );
 };
