@@ -1,24 +1,24 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Admin from "./Pages/Admin";
-import Login from "./Pages/Login";
+import NonRoutingComponentsGetRoutingInformation from "./RoutingInformation/NonRoutingComponentsGetRoutingInformation";
 
+// import PropsMatchParamStringPatternRegexp from "./RoutingInformation/PropsMatchParams+StringPatternRegexp";
+
+// import PropsMatchParamStringPatternRegexpCopy from "./RoutingInformation/PropsMatchParams+StringPatternRegexp copy";
+
+// import PropsMatchParamStringPattern from "./RoutingInformation/PropsMatchParams+StringPatternRegexp";
+// import PropsMatch from "./RoutingInformation/PropsMatch";
+
+// import PropsLocationSearchHash from "./RoutingInformation/PropsLocationSearch+Hash";
+
+// import PropsHistoryReplace from "./RoutingInformation/PropsHistoryReplace";
+
+// import PropsHistoryLocation from "./RoutingInformation/PropsHistoryLocation";
 const App = () => {
     return (
-        <BrowserRouter>
-            <Switch>
-                <Route
-                    exact={true}
-                    path="/login"
-                    component={Login}
-                />
-                <Route
-                    path="/"
-                    component={Admin}
-                />
-            </Switch>
-        </BrowserRouter>
+        <>
+            <NonRoutingComponentsGetRoutingInformation />
+        </>
     );
 };
 export default App;
