@@ -1,55 +1,22 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-const A = () => {
-    return <>组件A</>;
-};
-
-const B = () => {
-    return <>组件B</>;
-};
-
-// 任意路径
-const C = () => {
-    return (
-        <>
-            404 Not Found
-            <Route
-                exact
-                path="abc"
-                component={D}
-            />
-        </>
-    );
-};
-
-const D = () => {
-    return <>组件D</>;
-};
+import Admin from "./Pages/Admin";
+import Login from "./Pages/Login";
 
 const App = () => {
     return (
         <BrowserRouter>
             <Switch>
                 <Route
-                    exact
-                    path="/a"
-                    component={A}
-                >
-                    {() => {
-                        return (
-                            <div>
-                                <h1 style={{ color: "red" }}>必定会看到的内容</h1>
-                                <p>adfasdfasdf</p>
-                            </div>
-                        );
-                    }}
-                </Route>
-                <Route
-                    path="/a/b"
-                    component={B}
+                    exact={true}
+                    path="/login"
+                    component={Login}
                 />
-                <Route component={C} />
+                <Route
+                    path="/"
+                    component={Admin}
+                />
             </Switch>
         </BrowserRouter>
     );
