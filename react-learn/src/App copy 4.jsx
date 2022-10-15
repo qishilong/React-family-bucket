@@ -35,16 +35,7 @@ const App = () => {
                     exact
                     path="/a"
                     component={A}
-                >
-                    {() => {
-                        return (
-                            <div>
-                                <h1 style={{ color: "red" }}>必定会看到的内容</h1>
-                                <p>adfasdfasdf</p>
-                            </div>
-                        );
-                    }}
-                </Route>
+                />
                 <Route
                     path="/a/b"
                     component={B}
