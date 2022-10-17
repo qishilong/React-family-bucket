@@ -1,35 +1,20 @@
-.page{
-    width: 1600px;
-    border: 2px solid;
-    margin: 0 auto;
-}
-
-.page1{
-    background: lightblue;
-}
-
-.page2{
-    background: lightgreen;
-}
-
-.nav{
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #008c8c;
-    color: #fff;
-    padding: 20px;
-}
-
 .nav a{
-    color: inherit;
-    display: block;
-    margin: 20px 0;
+    color: #000;
     text-decoration: none;
     font-size: 2em;
+    margin: 30px;
 }
 
 .nav a.active{
-    color: yellow;
+    color: #f40;
+}
+
+.container{
+    margin: 30px;
+}
+
+.container textarea{
+    width: 500px;
+    height: 200px;
+    font-size: 2em;
 }
