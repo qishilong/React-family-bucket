@@ -1,12 +1,11 @@
 import "./App.css";
 
 import React from "react";
-import { NavLink, Route } from "react-router-dom";
+import { BrowserRouter, NavLink, Route } from "react-router-dom";
 
-import resetScroll from "./resetScroll";
-import RouteGuard from "./RouteGuard";
+import withScroll from "./withScroll";
 
-const Page1 = props => {
+const Page1 = () => {
     return (
         <div className="page page1">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam ex at fugiat, vero
@@ -192,7 +191,7 @@ const Page1 = props => {
     );
 };
 
-const Page2 = props => {
+const Page2 = () => {
     return (
         <div className="page page2">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam ex at fugiat, vero
@@ -378,28 +377,25 @@ const Page2 = props => {
     );
 };
 
+const Page1Wrapper = withScroll(Page1);
+const Page2Wrapper = withScroll(Page2);
+
 const App = () => {
     return (
-        <RouteGuard
-            onChange={(prevLocation, location) => {
-                if (prevLocation.pathname !== location.pathname) {
-                    resetScroll();
-                }
-            }}
-        >
+        <BrowserRouter>
             <Route
                 path="/page1"
-                component={Page1}
+                component={Page1Wrapper}
             />
             <Route
                 path="/page2"
-                component={Page2}
+                component={Page2Wrapper}
             />
             <div className="nav">
                 <NavLink to="/page1">页面1</NavLink>
                 <NavLink to="/page2">页面2</NavLink>
             </div>
-        </RouteGuard>
+        </BrowserRouter>
     );
 };
 
