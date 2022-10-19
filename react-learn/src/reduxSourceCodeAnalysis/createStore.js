@@ -1,21 +1,5 @@
-/**
- * 判断某个对象是否是一个flat-object
- * @param {*} obj
- */
-const isFlatObj = obj => {
-    if (typeof obj !== "object") {
-        return false;
-    }
-    return Object.getPrototypeOf(obj) === Object.prototype;
-};
-
-/**
- * 得到一个指定长度的随机字符串
- * @param {number} length
- */
-const getRandomString = length => {
-    return Math.random().toString(36).substring(2, length).split("").join(".");
-};
+import actionType from "./utils/actionType";
+import isFlatObject from "./utils/isFletObject";
 
 /**
  * 实现createStore功能
@@ -32,7 +16,7 @@ const createStore = (reducer, defaultState) => {
      * 实现dispatch功能
      */
     const dispatch = action => {
-        if (!isFlatObj(action)) {
+        if (!isFlatObject(action)) {
             throw new Error("antcion must be a flat object");
         }
         if (action.type === undefined) {
@@ -71,7 +55,7 @@ const createStore = (reducer, defaultState) => {
     };
 
     dispatch({
-        type: `@@redux/INIT${getRandomString(7)}`,
+        type: actionType.INIT(7),
     });
 
     return {
