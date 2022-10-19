@@ -1,5 +1,5 @@
 // import { bindActionCreators, createStore } from "redux";
-import { bindActionCreators, createStore } from "../reduxSourceCodeAnalysis";
+import { bindActionCreators, combineReducers, createStore } from "../reduxSourceCodeAnalysis";
 import { addUserAction, deleteUserAction } from "./action/userAction";
 import reducer from "./reducer";
 

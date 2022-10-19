@@ -8,8 +8,8 @@ const validateReducers = reducers => {
     if (typeof reducers !== "object") {
         throw new TypeError("reducers must be an object");
     }
-    if (isFlatObject(reducers)) {
-        throw new TypeError("reducers must be an flat objects");
+    if (!isFlatObject(reducers)) {
+        throw new TypeError("reducers must be an flat object");
     }
     // 验证reducer的返回结果是不是undefined
     for (const key in reducers) {
