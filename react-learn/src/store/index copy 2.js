@@ -13,7 +13,6 @@ const userAction = {
 };
 
 const actions = bindActionCreators(userAction, store.dispatch);
-console.log(actions);
 
 const unListen = store.subscribe(() => {
     console.log("监听器1", store.getState());
