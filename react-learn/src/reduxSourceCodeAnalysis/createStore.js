@@ -6,7 +6,18 @@ import isFlatObject from "./utils/isFletObject";
  * @param {function} reducer reducer
  * @param {any} defaultState 默认的状态值
  */
-const createStore = (reducer, defaultState) => {
+const createStore = (reducer, defaultState, enChanged) => {
+    // enChanged 表示applyMiddleware函数的返回值
+    if (typeof defaultState === "function") {
+        // 第二个参数是应用中间件的函数返回值
+        enChanged = defaultState;
+        defaultState = undefined;
+    }
+    if (typeof enChanged === "function") {
+        // 进入applyMiddleware的处理逻辑
+        return enChanged(createStore)(reducer, defaultState);
+    }
+
     let currentReducer = reducer, // 当前使用的reducer
         currentState = defaultState; // 当前使用的state
 
@@ -16,8 +27,9 @@ const createStore = (reducer, defaultState) => {
      * 实现dispatch功能
      */
     const dispatch = action => {
+        console.log(action);
         if (!isFlatObject(action)) {
-            throw new Error("antcion must be a flat object");
+            throw new Error("action must be a flat object");
         }
         if (action.type === undefined) {
             throw new Error("action must be a property type");
