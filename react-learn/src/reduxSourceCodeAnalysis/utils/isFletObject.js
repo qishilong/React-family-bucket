@@ -4,7 +4,7 @@
  */
 const isFlatObject = obj => {
     if (typeof obj !== "object") {
-        return;
+        return false;
     }
     return Object.getPrototypeOf(obj) === Object.prototype;
 };

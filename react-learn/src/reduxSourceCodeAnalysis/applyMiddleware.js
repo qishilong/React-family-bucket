@@ -13,7 +13,7 @@ const applyMiddleware = (...middleware) => {
             };
             const simpleState = {
                 getState: store.getState,
-                dispatch: store.dispatch,
+                dispatch: (...argus) => dispatch(...argus),
             };
 
             const dispatchProducers = middleware.map(item => item(simpleState));

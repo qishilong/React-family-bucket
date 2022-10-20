@@ -1,19 +1,39 @@
-// import {v4} from "uuid";
-import { ADDUSER, DELETEUSER, UPDATEUSER } from "../action/userAction";
+import { ADDUSER, DELETEUSER, SETLOADING, SETUSERS, UPDATEUSER } from "../action/userAction";
 
-const initialState = [
-    { id: 1, name: "用户1", age: 11 },
-    { id: 2, name: "用户2", age: 12 },
-];
+const initialState = {
+    users: [],
+    isLoading: false,
+};
 
 const userReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case ADDUSER:
-            return [...state, payload];
+            return {
+                ...state,
+                users: [...state.users, payload],
+            };
         case UPDATEUSER:
-            return state.map(item => (item.id === payload.id ? { ...item, ...payload } : item));
+            return {
+                ...state,
+                users: state.users.map(item =>
+                    item.id === payload.id ? { ...item, ...payload } : item,
+                ),
+            };
         case DELETEUSER:
-            return state.filter(item => item.id !== payload);
+            return {
+                ...state,
+                user: state.filter(item => item.id !== payload),
+            };
+        case SETUSERS:
+            return {
+                ...state,
+                users: payload,
+            };
+        case SETLOADING:
+            return {
+                ...state,
+                users: payload,
+            };
         default:
             return state;
     }
