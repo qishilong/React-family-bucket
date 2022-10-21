@@ -1,13 +1,13 @@
 import logger from "redux-logger";
 
-import thunk from "../redux-thunk";
+import reduxPromise from "../redux-promise";
 import { applyMiddleware, createStore } from "../reduxSourceCodeAnalysis";
 import reducer from "./reducer";
 
-// import thunk from "redux-thunk";
+// import reduxPromise from "redux-promise";
 
 // 应用中间件，方式1
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+const store = createStore(reducer, applyMiddleware(reduxPromise, logger));
 
 // 方式2
 // const store = applyMiddleware(thunk, logger)(createStore)(reducer);
