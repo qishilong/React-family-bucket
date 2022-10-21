@@ -1,4 +1,4 @@
 import store from ".";
-import { getAllStudentsFun } from "./action/userAction";
+import { getStudentData } from "./action/searchResult";
 
-store.dispatch(getAllStudentsFun());
+store.dispatch(getStudentData());
