@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 下面函数是一个生成器函数，用于创建生成器
+        function *createGenerator (){
+            console.log("生成器函数，开始");
+            let result = yield 1;
+            console.log("生成器函数，运行第一次", result);
+            result = yield 2;
+            console.log("生成器函数，运行第二次", result);
+            result = yield 3;
+            console.log("生成器函数，运行第三次", result);
+            return "结束";
+        }
+
+        const generator = createGenerator();  // 调用后，得到一个生成器
+
+        const result = generator.next();
+        while(!result.done){
+            result = generator.next(result.value)
+        }
+        // 会卡死，while会不断的开始迭代
+    </script>
+</body>
+</html>

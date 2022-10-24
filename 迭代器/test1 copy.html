@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // itreator 是一个迭代器
+    const itreator = {
+        total:3,    // 当前可迭代3次
+        i:1,
+        next(){
+            const obj = {
+                value: this.i>this.total?undefined:Math.random(),
+                done: this.i> this.total
+            }
+            i++;
+            return obj;
+        }
+    }
+
+</script>
+</body>
+</html>
