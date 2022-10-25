@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 
-import student from "./student";
+import counterReducer from "./counter";
+import studentReducer from "./student";
 
-export default combineReducers({
-    student,
-});
+const reducer = combineReducers({ counterReducer, studentReducer });
+
+export default reducer;

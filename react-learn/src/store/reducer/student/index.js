@@ -1,9 +1,8 @@
-import { combineReducers } from "../../../reduxSourceCodeAnalysis";
-import conditionReducer from "./searchCondition";
-import resultReducer from "./searchResult";
+import { combineReducers } from "redux";
 
-// import { combineReducers } from "redux";
-export default combineReducers({
-    condition: conditionReducer,
-    student: resultReducer,
-});
+import conditionReducer from "./conditionReducer";
+import resultReducer from "./resultReducer";
+
+const studentReducer = combineReducers({ conditionReducer, resultReducer });
+
+export default studentReducer;

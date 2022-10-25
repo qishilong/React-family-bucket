@@ -1,19 +1,19 @@
-import { SETDATAACTION, SETLOADINGACTION } from "../../action/searchResult";
+import { isLoading, studentAndTotal } from "../../action/student/searchResult";
 
-const initital = {
+const initialState = {
     data: [],
     total: 0,
     isLoading: false,
 };
 
-const resultReducer = (state = initital, { type, payload }) => {
+const resultReducer = (state = initialState, { type, payload }) => {
     switch (type) {
-        case SETDATAACTION:
+        case studentAndTotal:
             return {
                 ...state,
                 ...payload,
             };
-        case SETLOADINGACTION:
+        case isLoading:
             return {
                 ...state,
                 isLoading: payload,

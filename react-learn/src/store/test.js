@@ -1,4 +1,18 @@
 import store from ".";
-import { getStudentData } from "./action/searchResult";
+import { asyncDecreaseFn, asyncIncreaseFn, decreaseFn, increaseFn } from "./action/counter";
 
-store.dispatch(getStudentData(store.getState().student.condition));
+window.increaseFn = () => {
+    store.dispatch(increaseFn());
+};
+
+window.decreaseFn = () => {
+    store.dispatch(decreaseFn());
+};
+
+window.asyncIncreaseFn = () => {
+    store.dispatch(asyncIncreaseFn());
+};
+
+window.asyncDecreaseFn = () => {
+    store.dispatch(asyncDecreaseFn());
+};

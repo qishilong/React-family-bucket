@@ -1,15 +1,13 @@
 import logger from "redux-logger";
+import createSagaMiddleware from "redux-saga";
 
-import reduxPromise from "../redux-promise";
 import { applyMiddleware, createStore } from "../reduxSourceCodeAnalysis";
 import reducer from "./reducer";
+import rootSaga from "./saga";
 
-// import reduxPromise from "redux-promise";
+const sagaMiddle = createSagaMiddleware(); // 创建一个saga中间件
 
-// 应用中间件，方式1
-const store = createStore(reducer, applyMiddleware(reduxPromise, logger));
+const store = createStore(reducer, applyMiddleware(sagaMiddle, logger));
 
-// 方式2
-// const store = applyMiddleware(thunk, logger)(createStore)(reducer);
-
+sagaMiddle.run(rootSaga);   // 启动saga任务
 export default store;

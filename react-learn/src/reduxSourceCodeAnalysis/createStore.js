@@ -27,7 +27,6 @@ const createStore = (reducer, defaultState, enChanged) => {
      * 实现dispatch功能
      */
     const dispatch = action => {
-        console.log(action);
         if (!isFlatObject(action)) {
             throw new Error("action must be a flat object");
         }
