@@ -1,11 +1,23 @@
 import { cancel, delay, fork, put, take, takeEvery } from "redux-saga/effects";
 
-import { asyncDecrease, asyncIncrease, decreaseFn, increaseFn } from "../action/counter";
+import { asyncDecrease, asyncIncrease, autoIncrease, decreaseFn, increaseFn } from "../action/counter";
 
-function* asyncIncreaseFn() {
+/**
+ * takeEvery 实现原理
+ */
+// const takeEvery = (actionType, saga) => {
+//     return fork(function* () {
+//         while (true) {
+//             const action = yield take(actionType);
+//             fork(saga);
+//         }
+//     });
+// };
+
+function* autoIncreaseFn() {
     let task;
     while (true) {
-        yield take(asyncIncrease);
+        yield take(autoIncrease);
         if (task) {
             // 说明之前有任务,先把之前的任务取消，再开启新的任务
             yield cancel(task);
@@ -18,15 +30,9 @@ function* asyncIncreaseFn() {
     }
 }
 
-function* asyncDecreaseFn() {
-    yield delay(2000);
-    yield put(decreaseFn());
-}
-
 function* conuterTask() {
-    yield fork(asyncIncreaseFn);
-    yield takeEvery(asyncDecrease, asyncDecreaseFn);
-    console.log("正在监听asyncIncreaseFn,asyncDecreaseFn");
+    yield fork(autoIncreaseFn);
+    console.log("正在监听autoIncreaseFn");
 }
 
 export default conuterTask;
