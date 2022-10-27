@@ -1,37 +1,27 @@
-import store from ".";
-import {
-    asyncDecreaseFn,
-    asyncIncreaseFn,
-    autoIncreaseFn,
-    decreaseFn,
-    increaseFn,
-    stopAutoIncreaseFn,
-} from "./action/counter";
-import { setFetchStudent } from "./action/student/searchResult";
+import store from "./index"
+import { increase, decrease, asyncIncrease, asyncDecrease, add } from "./action/counter"
+import { fetchStudents } from './action/student/searchResult'
 
-window.fetchStudent = () => {
-    store.dispatch(setFetchStudent());
-};
-window.increaseFn = () => {
-    store.dispatch(increaseFn());
-};
+window.fetchStudents = function () {
+    store.dispatch(fetchStudents());
+}
 
-window.decreaseFn = () => {
-    store.dispatch(decreaseFn());
-};
+window.add = function (n) {
+    store.dispatch(add(n));
+}
 
-window.asyncIncreaseFn = () => {
-    store.dispatch(asyncIncreaseFn());
-};
+window.increase = function () {
+    store.dispatch(increase());
+}
 
-window.asyncDecreaseFn = () => {
-    store.dispatch(asyncDecreaseFn());
-};
+window.decrease = function () {
+    store.dispatch(decrease());
+}
 
-window.autoIncrease = () => {
-    store.dispatch(autoIncreaseFn());
-};
+window.asyncIncrease = function () {
+    store.dispatch(asyncIncrease());
+}
 
-window.stopAutoIncrease = () => {
-    store.dispatch(stopAutoIncreaseFn());
-};
+window.asyncDecrease = function () {
+    store.dispatch(asyncDecrease());
+}

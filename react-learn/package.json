@@ -52,8 +52,10 @@
     "react-router-dom": "^5.0.1",
     "react-transition-group": "^4.4.5",
     "redux": "4.0.2",
+    "redux-actions": "^2.6.5",
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.6.0",
+    "redux-saga": "^1.0.5",
     "redux-thunk": "^2.4.1",
     "resolve": "^1.20.0",
     "resolve-url-loader": "^4.0.0",
@@ -68,8 +70,7 @@
     "webpack": "^5.64.4",
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
-    "workbox-webpack-plugin": "^6.4.1",
-    "redux-saga": "^1.0.5"
+    "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
     "start": "node scripts/start.js",

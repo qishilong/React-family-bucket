@@ -1,29 +1,18 @@
-import { call, delay, fork, put, race, take } from "redux-saga/effects";
+import { takeEvery, delay, put } from "redux-saga/effects"
+import { asyncIncrease, asyncDecrease, increase, decrease } from "../action/counter"
 
-import { autoIncrease, increaseFn, stopAutoIncrease } from "../action/counter";
-
-/**
- * 自动增加和停止的流程控制
- * 流程: 自动增加 -> 停止 -> 自动增加 -> 停止
- */
-function* autoTask() {
-    while (true) {
-        yield take(autoIncrease); // 只监听autoIncrease
-        yield race({
-            autoIncrease: call(function* () {
-                while (true) {
-                    yield delay(2000);
-                    yield put(increaseFn());
-                }
-            }),
-            cancel: take(stopAutoIncrease),
-        });
-    }
+function* asyncIncreaseSaga() {
+    yield delay(2000);
+    yield put(increase())
 }
 
-function* conuterTask() {
-    yield fork(autoTask);
-    console.log("正在监听autoIncreaseFn");
+function* asyncDecreaseSaga() {
+    yield delay(2000);
+    yield put(decrease())
 }
 
-export default conuterTask;
+export default function* () {
+    yield takeEvery(asyncIncrease.toString(), asyncIncreaseSaga)
+    yield takeEvery(asyncDecrease.toString(), asyncDecreaseSaga)
+    console.log("正在监听asyncIncrease、asyncDecrease")
+}

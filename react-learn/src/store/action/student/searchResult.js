@@ -1,27 +1,26 @@
-export const studentAndTotal = Symbol("setStundetAndTotal");
-export const isLoading = Symbol("setLoading");
-export const fetchStudent = Symbol("setFetchStudent");
+import { createActions, handleActions } from "redux-actions"
 
+export const { setStudentsAndTotal, setIsLoading, fetchStudents } = createActions({
+    SET_STUDENTS_AND_TOTAL: (arr, total) => ({
+        datas: arr,
+        total
+    }),
+    SET_IS_LOADING: isLoading => isLoading,
+    FETCH_STUDENTS: null
+})
 
-export const setStudentAndTotal = (data, total) => {
-    return {
-        type: studentAndTotal,
-        payload: {
-            data: data,
-            total,
-        },
-    };
-};
+export default handleActions({
+    [setStudentsAndTotal]: (state, { payload }) => ({
+        ...state,
+        ...payload
+    }),
+    [setIsLoading]: (state, { payload }) => ({
+        ...state,
+        isLoading: payload
+    })
 
-export const setIsLoading = isLoading => {
-    return {
-        type: isLoading,
-        payload: isLoading,
-    };
-};
-
-export const setFetchStudent = () => {
-    return {
-        type: fetchStudent,
-    };
-};
+}, {
+        datas: [],
+        total: 0,
+        isLoading: false
+    })

@@ -1,23 +1,18 @@
-import { call, put, select, takeEvery } from "redux-saga/effects";
-
-import { searchStudents } from "../../services/fetchStudent";
-import { fetchStudent, setIsLoading, setStudentAndTotal } from "../action/student/searchResult";
+import { actionTypes, setIsLoading, setStudentsAndTotal } from "../action/student/searchResult"
+import { takeEvery, put, call, select } from "redux-saga/effects"
+import { searchStudents } from "../../services/student"
 
 function* fetchStudents() {
-    // 设置为正在加载中
-    yield put(setIsLoading(true));
-    const condition = yield select(state => state.studentReducer.conditionReducer);
-    // 根据call指令，获取当前仓库的条件
-    const resp = yield call(searchStudents, condition);
-    console.log(resp);
-    yield put(setStudentAndTotal(resp.data, resp.cont));
+    //设置为正在加载中
+    yield put(setIsLoading(true))
+    const condition = yield select(state => state.students.condition);
+    //使用call指令，按照当前仓库中的条件
+    const resp = yield call(searchStudents, condition)
+    yield put(setStudentsAndTotal(resp.datas, resp.cont))
     yield put(setIsLoading(false));
-    console.log(resp);
 }
 
-function* fetchStudentFn() {
-    yield takeEvery(fetchStudent, fetchStudents);
-    console.log("正在监听fetchStudent");
+export default function* () {
+    yield takeEvery(actionTypes.fetchStudents, fetchStudents);
+    console.log("正在监听 fetchStudents")
 }
-
-export default fetchStudentFn;

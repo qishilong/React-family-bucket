@@ -1,34 +1,16 @@
-export const increase = Symbol("increase");
-export const decrease = Symbol("decrease");
-export const asyncIncrease = Symbol("asyncIncrease");
-export const asyncDecrease = Symbol("asyncDecrease");
-export const autoIncrease = Symbol("autoIncrement"); // 自动增加
-export const stopAutoIncrease = Symbol("stopAutoIncrement"); // 停止自动增加
+import { createActions, handleActions, combineActions } from "redux-actions"
 
-export const increaseFn = () => {
-    return { type: increase };
-};
+const actions = createActions({
+    INCREASE: () => 1,
+    DECREASE: () => -1,
+    ASYNC_INCREASE: null,
+    ASYNC_DECREASE: null,
+    ADD: number => number
+});
 
-export const decreaseFn = () => {
-    return { type: decrease };
-};
+export const { increase, decrease, asyncIncrease, asyncDecrease, add } = actions
 
-export const asyncIncreaseFn = () => {
-    return { type: asyncIncrease };
-};
 
-export const asyncDecreaseFn = () => {
-    return { type: asyncDecrease };
-};
-
-export const autoIncreaseFn = () => {
-    return {
-        type: autoIncrease,
-    };
-};
-
-export const stopAutoIncreaseFn = () => {
-    return {
-        type: stopAutoIncrease,
-    };
-};
+export default handleActions({
+    [combineActions(increase, decrease, add)]: (state, { payload }) => state + payload
+}, 0)
