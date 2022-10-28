@@ -1,47 +1,26 @@
-import { actionTypes, setIsLoading, setStudentsAndTotal } from "../action/student/searchResult"
-import { takeEvery, put, cps, select } from "redux-saga/effects"
+import { call, put, select, takeEvery } from "redux-saga/effects";
 
-/**
- * 回调模式的异步
- * @param {*} callback 
- */
-function mockStudents(condition, callback) {
-    console.log("mockStudents", condition);
-    setTimeout(() => {
-        if (Math.random() > 0.5) {
-            //nodejs风格
-            callback(null, {
-                cont: 78,
-                datas: [
-                    { id: 1, name: "abc" },
-                    { id: 2, name: "bcd" }
-                ]
-            })
-        }
-        else {
-            callback(new Error("出错了！！！1"), null);
-        }
-    }, 1000);
-}
+import { searchStudents } from "../../services/fetchStudent";
+import { actionTypes, setIsLoading, setStudentsAndTotal } from "../action/student/searchResult";
 
 function* fetchStudents() {
     //设置为正在加载中
-    yield put(setIsLoading(true))
+    yield put(setIsLoading(true));
     const condition = yield select(state => state.students.condition);
     //使用call指令，按照当前仓库中的条件
     try {
-        const resp = yield cps(mockStudents, condition)
-        yield put(setStudentsAndTotal(resp.datas, resp.cont))
-    }
-    catch (err) {
+        const resp = yield call(searchStudents, condition);
+        yield put(setStudentsAndTotal(resp.data, resp.cont));
+    } catch (err) {
         console.log(err.message);
-    }
-    finally {
+    } finally {
         yield put(setIsLoading(false));
     }
 }
 
-export default function* () {
+function* studentTask() {
     yield takeEvery(actionTypes.fetchStudents, fetchStudents);
-    console.log("正在监听 fetchStudents")
+    console.log("正在监听 fetchStudents");
 }
+
+export default studentTask;

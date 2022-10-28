@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
-import { asyncDecrease, asyncIncrease, decrease, increase } from "../../store/action/counter";
+import { asyncDecrease, asyncIncrease, decrease, increase } from "../store/action/counter";
 
 // 展示组件
 const Counter = props => {
@@ -27,15 +26,20 @@ const mapStateToProps = (state, oweProps) => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            onAsyncIncrease: asyncIncrease,
-            onAsyncDecrease: asyncDecrease,
-            onIncrease: increase,
-            onDecrease: decrease,
+    return {
+        onAsyncIncrease() {
+            dispatch(asyncIncrease());
         },
-        dispatch,
-    );
+        onAsyncDecrease() {
+            dispatch(asyncDecrease());
+        },
+        onIncrease() {
+            dispatch(increase());
+        },
+        onDecrease() {
+            dispatch(decrease());
+        },
+    };
 };
 
 // // connect 返回一个高阶组件

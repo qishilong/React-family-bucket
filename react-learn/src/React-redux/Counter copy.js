@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
-import { asyncDecrease, asyncIncrease, decrease, increase } from "../../store/action/counter";
+import store from "../store";
+import { asyncDecrease, asyncIncrease, decrease, increase } from "../store/action/counter";
 
 // 展示组件
 const Counter = props => {
@@ -18,8 +18,7 @@ const Counter = props => {
     );
 };
 
-const mapStateToProps = (state, oweProps) => {
-    console.log(oweProps);
+const mapStateToProps = state => {
     return {
         number: state.counter,
     };
@@ -42,10 +41,25 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-// // connect 返回一个高阶组件
-// const hoc = connect(mapStateToProps, mapDispatchToProps);
+// 容器组件
+export default class CounterContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = mapStateToProps(store.getState());
+        console.log(this.state);
+        store.subscribe(() => {
+            this.setState(mapStateToProps(store.getState()));
+            console.log(store.getState());
+        });
+    }
 
-// // 传入展示组件，返回容器组件
-// export default hoc(Counter);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+    render() {
+        const evenHandle = mapDispatchToProps(store.dispatch);
+        return (
+            <Counter
+                {...this.state}
+                {...evenHandle}
+            ></Counter>
+        );
+    }
+}
