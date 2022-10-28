@@ -1,4 +1,4 @@
-import { fetchStudents, setIsLoading, setStudentsAndTotal } from "../action/student/searchResult"
+import { actionTypes, setIsLoading, setStudentsAndTotal } from "../action/student/searchResult"
 import { takeEvery, put, cps, select } from "redux-saga/effects"
 
 /**
@@ -24,7 +24,7 @@ function mockStudents(condition, callback) {
     }, 1000);
 }
 
-function* fetchStudentsSaga() {
+function* fetchStudents() {
     //设置为正在加载中
     yield put(setIsLoading(true))
     const condition = yield select(state => state.students.condition);
@@ -42,6 +42,6 @@ function* fetchStudentsSaga() {
 }
 
 export default function* () {
-    yield takeEvery(fetchStudents.toString(), fetchStudentsSaga);
+    yield takeEvery(actionTypes.fetchStudents, fetchStudents);
     console.log("正在监听 fetchStudents")
 }
