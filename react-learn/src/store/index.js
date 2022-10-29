@@ -1,16 +1,18 @@
 // 用于创建仓库，并导出
 import { applyMiddleware, createStore } from "redux";
-import logger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 
 import reducer from "./reducer";
 import rootSaga from "./saga";
 
+// import logger from "redux-logger";
 const sagaMid = createSagaMiddleware(); //创建一个saga的中间件
 
-const store = createStore(reducer,
-    applyMiddleware(sagaMid, logger)
-)
+const store = createStore(
+    reducer,
+    // applyMiddleware(sagaMid, logger)
+    applyMiddleware(sagaMid),
+);
 
 console.log(store.getState());
 

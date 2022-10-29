@@ -20,7 +20,11 @@ export async function getStudents(page = 1, limit = 10) {
 export async function searchStudents({ page = 1, limit = 10, sex = -1, key = "" } = {}) {
     if (key) {
         // 查询
-        const resp = await fetch(`/api/student/searchStudent?appkey=${appkey}&page=${page}&size=${limit}&search=${key}&sex=${sex}`).then((resp)=>resp.json()).then(resp=>resp.data);
+        const resp = await fetch(
+            `/api/student/searchStudent?appkey=${appkey}&page=${page}&size=${limit}&search=${key}&sex=${sex}`,
+        )
+            .then(resp => resp.json())
+            .then(resp => resp.data);
         resp.data = resp.searchList;
         delete resp.searchList;
         return resp;

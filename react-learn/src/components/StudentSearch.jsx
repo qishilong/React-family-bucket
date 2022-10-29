@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
 
+import { connect } from "../react-redux";
 import store from "../store";
 import { change as changeCondition } from "../store/action/student/searchCondition";
 import { fetchStudents } from "../store/action/student/searchResult";
@@ -9,8 +9,9 @@ import Loading from "./Loading";
 import StudentTableList from "./StudentTableList";
 import StudentTableSearchTop from "./StudentTableSearchTop";
 
+// import { connect } from "react-redux";
 let mapStateToProps = state => ({
-    defaultState: {
+    defaultProps: {
         key: state.students.condition.key,
         sex: state.students.condition.sex,
     },
