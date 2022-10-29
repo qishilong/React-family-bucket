@@ -1,21 +1,22 @@
 import "./index.less";
 
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Menu = () => {
     return (
         <ul className="menu">
             <li>
-                <a href="/students">学生列表</a>
+                <NavLink to="/students">学生列表</NavLink>
             </li>
             <li>
-                <a href="/students/add">添加学生</a>
+                <NavLink to="/students/add">添加学生</NavLink>
             </li>
             <li>
-                <a href="/courses">课程列表</a>
+                <NavLink to="/courses">课程列表</NavLink>
             </li>
             <li>
-                <a href="/courses/add">添加课程</a>
+                <NavLink to="/courses/add">添加课程</NavLink>
             </li>
         </ul>
     );
