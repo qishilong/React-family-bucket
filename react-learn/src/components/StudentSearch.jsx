@@ -1,6 +1,6 @@
 import { useEffect } from "react";
+import { connect, connectAdvanced } from "react-redux";
 
-import { connect } from "../react-redux";
 import store from "../store";
 import { change as changeCondition } from "../store/action/student/searchCondition";
 import { fetchStudents } from "../store/action/student/searchResult";
@@ -9,7 +9,7 @@ import Loading from "./Loading";
 import StudentTableList from "./StudentTableList";
 import StudentTableSearchTop from "./StudentTableSearchTop";
 
-// import { connect } from "react-redux";
+// import { connect } from "../react-redux";
 let mapStateToProps = state => ({
     defaultProps: {
         key: state.students.condition.key,
@@ -35,21 +35,38 @@ mapStateToProps = state => ({
 });
 const StudentTable = connect(mapStateToProps, mapDispatchToProps)(StudentTableList);
 
-mapStateToProps = state => ({
-    current: state.students.condition.page,
-    total: state.students.result.total,
-    limit: state.students.condition.limit,
-    panelNumber: 5,
-});
+// 连接Pager
+// mapStateToProps = state => ({
+//     current: state.students.condition.page,
+//     total: state.students.result.total,
+//     limit: state.students.condition.limit,
+//     panelNumber: 5,
+// });
 
-mapDispatchToProps = dispatch => ({
-    onPageChange: newPage => {
-        dispatch(changeCondition({ page: newPage }));
-        dispatch(fetchStudents());
-    },
-});
+// mapDispatchToProps = dispatch => ({
+//     onPageChange: newPage => {
+//         dispatch(changeCondition({ page: newPage }));
+//         dispatch(fetchStudents());
+//     },
+// });
 
-const PageTable = connect(mapStateToProps, mapDispatchToProps)(Pager);
+const pagerFactory = dispatch => {
+    return (state, ownProps) => {
+        // console.log(state, ownProps);
+        return {
+            current: state.students.condition.page,
+            total: state.students.result.total,
+            limit: state.students.condition.limit,
+            panelNumber: 5,
+            onPageChange: newPage => {
+                dispatch(changeCondition({ page: newPage }));
+                dispatch(fetchStudents());
+            },
+        };
+    };
+};
+
+const PageTable = connectAdvanced(pagerFactory)(Pager);
 
 mapStateToProps = state => ({
     show: state.students.result.isLoading,
