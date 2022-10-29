@@ -4,7 +4,6 @@ export const actionTypes = {
     asyncIncrease: "ASYNC_INCREASE", //异步增加
     asyncDecrease: "ASYNC_DECREASE",
 };
-
 export function increase() {
     return { type: actionTypes.increase }
 }
