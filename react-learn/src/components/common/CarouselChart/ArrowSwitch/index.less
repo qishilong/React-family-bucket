@@ -1,0 +1,30 @@
+.carouselChartContainer:hover .arrow{
+    display: block;
+}
+.arrow{
+    display: none;
+    span{
+        position: absolute;
+        color: #fff;
+        width: 20px;
+        height: 30px;
+        line-height: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,.5);
+        box-sizing: border-box;
+        cursor: pointer;
+        &:hover{
+            background: rgba(0,0,0,.7);
+        }
+    }
+        .left{
+            left: 0;
+            border-radius: 0 30px 30px 0;
+        }
+        .right{
+            right: 0;
+            border-radius: 30px 0 0 30px;
+            padding-left: 6px;
+        }
+}
