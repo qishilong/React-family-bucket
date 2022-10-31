@@ -1,10 +1,12 @@
 import dva from "dva";
+import createLoading from "dva-loading";
 import { createBrowserHistory } from "history";
 
 import counterModel from "./models/counter";
 import studentsModel from "./models/students";
 import routerConfig from "./routerConfig";
 
+// import loggerPlugin from "./myDvaPlugin";
 // const logger = store => next => action => {
 //     console.log("老状态：", store.getState());
 //     next(action);
@@ -16,7 +18,7 @@ import routerConfig from "./routerConfig";
 const app = dva({
     history: createBrowserHistory(),
     initialState: {
-        counter: 123
+        counter: 123,
     },
     // onError(err, dispatch) {
     //     console.log(err.message, dispatch);
@@ -46,24 +48,31 @@ const app = dva({
         },
         bcd(state = 456, action) {
             return state;
-        }
+        },
     },
-    extraEnhancers: [function (createStore) {
-        return function (...args) {
-            console.log("即将创建仓库1")
-            return createStore(...args);
-        }
-    }, function (createStore) {
-        return function (...args) {
-            console.log("即将创建仓库2")
-            return createStore(...args);
-        }
-    }]
+    extraEnhancers: [
+        function (createStore) {
+            return function (...args) {
+                console.log("即将创建仓库1");
+                return createStore(...args);
+            };
+        },
+        function (createStore) {
+            return function (...args) {
+                console.log("即将创建仓库2");
+                return createStore(...args);
+            };
+        },
+    ],
 });
 
 //在启动之前定义模型
-app.model(counterModel)
-app.model(studentsModel)
+app.model(counterModel);
+app.model(studentsModel);
+
+//使用dva-loading插件
+app.use(createLoading());
+// app.use(loggerPlugin);
 
 //设置根路由，即启动后，要运行的函数，函数的返回结果会被渲染
 app.router(routerConfig)

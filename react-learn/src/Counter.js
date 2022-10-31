@@ -1,6 +1,8 @@
 import { connect } from "dva";
 import React, { useRef } from "react";
 
+import Modal from "./components/common/Modal";
+
 function Counter(props) {
     const inp = useRef();
     console.log(props);
@@ -25,6 +27,11 @@ function Counter(props) {
                     加上
                 </button>
             </p>
+            {props.isLoading && (
+                <Modal>
+                    <div style={{ color: "#fff", fontSize: "2em" }}>加载中...</div>
+                </Modal>
+            )}
         </div>
     );
 }
@@ -32,6 +39,7 @@ function Counter(props) {
 const mapStateToProps = state => {
     console.log(state);
     return {
+        isLoading: state.loading.models.counter,
         number: state.counter,
     };
 };

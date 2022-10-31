@@ -1,4 +1,4 @@
-export default {
+const counter = {
     namespace: "counter",
     state: 0,
     reducers: {
@@ -10,37 +10,39 @@ export default {
         },
         add(state, { payload }) {
             return state + payload;
-        }
+        },
     },
     effects: {
         *asyncIncrease(action, { call, put }) {
             yield call(delay, 1000);
-            yield put({ type: "increase" })
+            yield put({ type: "increase" });
         },
         *asyncDecrease(action, { call, put }) {
             yield call(delay, 1000);
-            yield put({ type: "decrease" })
-        }
+            yield put({ type: "decrease" });
+        },
     },
     subscriptions: {
         resizeIncrease({ dispatch }) {
             //订阅窗口尺寸变化，每次变化让数字增加
             window.onresize = () => {
-                dispatch({ type: "increase" })
-            }
+                dispatch({ type: "increase" });
+            };
         },
         resizeDecrease({ dispatch, history }) {
             history.listen(() => {
-                dispatch({ type: "decrease" })
-            })
-        }
-    }
-}
+                dispatch({ type: "decrease" });
+            });
+        },
+    },
+};
 
 function delay(duration) {
     return new Promise(resolve => {
         setTimeout(() => {
-            resolve()
+            resolve();
         }, duration);
-    })
+    });
 }
+
+export default counter;
