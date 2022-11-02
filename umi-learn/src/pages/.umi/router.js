@@ -13,55 +13,30 @@ const routes = [
     component: require('../../layouts/index.js').default,
     routes: [
       {
-        path: '/counter',
-        exact: true,
-        component: require('../counter.js').default,
-        _title: true,
-        _title_default: true,
-      },
-      {
         path: '/',
         exact: true,
         component: require('../index.js').default,
-        title: '首页',
-        Routes: [require('./TitleWrapper.jsx').default],
-        _title: '首页',
-        _title_default: true,
+        Routes: [require('../../router/PrivateRouter').default],
       },
       {
         path: '/login',
         exact: true,
         component: require('../login.js').default,
-        title: '登录页',
-        Routes: [require('./TitleWrapper.jsx').default],
-        _title: '登录页',
-        _title_default: true,
       },
       {
-        path: '/sub/a',
+        path: '/student/add',
         exact: true,
-        component: require('../sub/a.js').default,
-        _title: true,
-        _title_default: true,
+        component: require('../student/add.js').default,
       },
       {
-        path: '/sub/sub/b',
+        path: '/student',
         exact: true,
-        component: require('../sub/sub/b.js').default,
-        _title: true,
-        _title_default: true,
+        component: require('../student/index.js').default,
       },
       {
-        path: '/welcome',
+        path: '/student/:id',
         exact: true,
-        component: require('../welcome.js').default,
-        title: '欢迎页',
-        Routes: [
-          require('../../routes/PrivateRouter.js').default,
-          require('./TitleWrapper.jsx').default,
-        ],
-        _title: '欢迎页',
-        _title_default: true,
+        component: require('../student/$id.js').default,
       },
       {
         component: () =>
@@ -70,12 +45,8 @@ const routes = [
               .default,
             { pagesPath: 'src/pages', hasRoutesInConfig: false },
           ),
-        _title: true,
-        _title_default: true,
       },
     ],
-    _title: true,
-    _title_default: true,
   },
   {
     component: () =>
@@ -84,8 +55,6 @@ const routes = [
           .default,
         { pagesPath: 'src/pages', hasRoutesInConfig: false },
       ),
-    _title: true,
-    _title_default: true,
   },
 ];
 window.g_routes = routes;

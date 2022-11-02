@@ -12,7 +12,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "mockjs": "^1.0.1-beta3",
+        "redux-logger": "^3.0.6",
         "umi-plugin-react": "^1.9.19"
     }
 }
