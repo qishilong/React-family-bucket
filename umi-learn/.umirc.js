@@ -4,9 +4,10 @@ export default {
             dva: true
         }]
     ],
-    // history: "hash",
-    outputPath: "./out",
-    base: "/abc",
-    publicPath: "./public/",
-    exportStatic: true
+    proxy: {
+        "/api": {
+            target: "http://api.duyiedu.com/",
+            changeOrigin: true
+        }
+    }
 }
